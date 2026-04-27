@@ -76,6 +76,11 @@ function createRequestId(): string {
   return `dz_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 }
 
+/** Escape user text for Telegram HTML parse_mode. */
+function escapeTelegramHtml(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 async function sendToGoogleSheets(data: Record<string, string>): Promise<void> {
   const webhookUrl = process.env.GOOGLE_SCRIPT_WEBHOOK_URL;
   if (!webhookUrl) throw new Error("GOOGLE_SCRIPT_WEBHOOK_URL is not configured");
@@ -148,13 +153,16 @@ export async function POST(request: NextRequest) {
 
   try {
     await sendToGoogleSheets(leadData);
+    const safeName = escapeTelegramHtml(name);
+    const safePhone = escapeTelegramHtml(phone);
+    const safeService = escapeTelegramHtml(service || "-");
     await notifyTelegram(
       [
         "📩 <b>Новая заявка DryZone</b>",
         `ID: <code>${requestId}</code>`,
-        `Имя: ${name}`,
-        `Телефон: ${phone}`,
-        `Услуга: ${service || "-"}`,
+        `Имя: ${safeName}`,
+        `Телефон: ${safePhone}`,
+        `Услуга: ${safeService}`,
       ].join("\n"),
     );
     return NextResponse.json({ ok: true, requestId }, { status: 200 });

@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DryZone",
-  description: "Профессиональная озонация и сухой туман",
+  title: "Озонация салона авто в Киеве | DryZone",
+  description:
+    "Профессиональная озонация салона авто с выездом. Удаляем запахи, бактерии и аллергены за 30 минут.",
 };
 
 export default function RootLayout({
@@ -24,10 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="ru"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
 }

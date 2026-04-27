@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Озонация салона авто в Киеве</title>
+    <meta
+      name="description"
+      content="Профессиональная озонация салона авто с выездом. Удаляем запахи, бактерии и аллергены за 30 минут."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            boxShadow: {
+              soft: "0 8px 30px rgba(15, 23, 42, 0.08)",
+              softer: "0 16px 40px rgba(15, 23, 42, 0.06)",
+            },
+            colors: {
+              brand: {
+                500: "#0ea5a4",
+                600: "#0d9488",
+              },
+            },
+            keyframes: {
+              fadeInUp: {
+                "0%": { opacity: 0, transform: "translateY(20px)" },
+                "100%": { opacity: 1, transform: "translateY(0)" },
+              },
+            },
+            animation: {
+              "fade-in-up": "fadeInUp 0.7s ease forwards",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased">
+    <header
+      id="site-header"
+      class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+    >
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div
+          class="mt-3 flex items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 md:px-6"
+        >
+          <a href="#" class="text-lg font-semibold tracking-tight">
+            Dry<span class="text-brand-600">Zone</span>
+          </a>
+
+          <nav class="hidden items-center gap-8 text-sm text-slate-700 md:flex">
+            <a class="transition hover:text-slate-900" href="#services">Услуги</a>
+            <a class="transition hover:text-slate-900" href="#faq">FAQ</a>
+            <a class="transition hover:text-slate-900" href="#contact">Контакты</a>
+          </nav>
+
+          <div class="hidden items-center gap-3 md:flex">
+            <a
+              class="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-white"
+              href="tel:+380991234567"
+              >+38 (099) 123-45-67</a
+            >
+            <a
+              class="rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
+              href="#contact"
+              >Заказать</a
+            >
+          </div>
+
+          <button
+            id="mobile-menu-toggle"
+            class="inline-flex rounded-lg border border-slate-200 p-2 text-slate-700 md:hidden"
+            type="button"
+            aria-label="Открыть меню"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+        <nav
+          id="mobile-menu"
+          class="mt-2 hidden rounded-2xl bg-white p-4 shadow-soft md:hidden"
+        >
+          <div class="flex flex-col gap-3 text-sm">
+            <a href="#services">Услуги</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Контакты</a>
+            <a class="pt-1 font-semibold text-brand-600" href="tel:+380991234567">+38 (099) 123-45-67</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="relative min-h-screen pt-24">
+        <div class="absolute inset-0">
+          <div
+            class="hero-slide absolute inset-0 bg-cover bg-center opacity-100 transition-opacity duration-700"
+            style="background-image: linear-gradient(120deg, #0f172a, #1e293b);"
+          ></div>
+          <div
+            class="hero-slide absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700"
+            style="background-image: linear-gradient(120deg, #0b3b3b, #134e4a);"
+          ></div>
+          <div
+            class="hero-slide absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700"
+            style="background-image: linear-gradient(120deg, #111827, #1f2937);"
+          ></div>
+        </div>
+
+        <div class="relative mx-auto flex min-h-[86vh] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+          <div class="max-w-2xl text-white">
+            <p class="hero-animated mb-4 inline-flex rounded-full bg-white/10 px-4 py-1 text-xs tracking-wide text-white/90 opacity-0">
+              Удаляем запахи, бактерии и аллергены
+            </p>
+            <h1 class="hero-animated mb-6 text-4xl font-semibold leading-tight opacity-0 sm:text-5xl md:text-6xl">
+              Глубокая озонация салона авто без лишней химии
+            </h1>
+            <p class="hero-animated mb-9 max-w-xl text-base text-slate-100 opacity-0 sm:text-lg">
+              Профессиональная обработка озоном с выездом по Киеву. Чистый воздух и свежий салон уже через 30 минут.
+            </p>
+            <div class="hero-animated flex flex-wrap gap-3 opacity-0">
+              <a
+                href="#contact"
+                class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                >Оставить заявку</a
+              >
+              <a
+                href="#services"
+                class="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >Посмотреть услуги</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2">
+          <button class="hero-dot h-2.5 w-8 rounded-full bg-white" data-slide="0" aria-label="Слайд 1"></button>
+          <button class="hero-dot h-2.5 w-2.5 rounded-full bg-white/50" data-slide="1" aria-label="Слайд 2"></button>
+          <button class="hero-dot h-2.5 w-2.5 rounded-full bg-white/50" data-slide="2" aria-label="Слайд 3"></button>
+        </div>
+      </section>
+
+      <section id="services" class="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+        <div class="mb-14 max-w-3xl">
+          <p class="mb-3 text-sm font-medium text-brand-600">Услуги и цены</p>
+          <h2 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            Прозрачный прайс под ваш тип помещения
+          </h2>
+          <p class="mt-4 text-slate-600">
+            Фиксированная стоимость для популярных сценариев и индивидуальная оценка для больших объектов.
+          </p>
+        </div>
+
+        <div class="space-y-10">
+          <div>
+            <h3 class="mb-5 text-2xl font-semibold tracking-tight">Автомобили</h3>
+            <div class="grid gap-6 lg:grid-cols-3">
+              <article class="rounded-2xl bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:shadow-lg">
+                <div class="mb-5 flex items-center justify-between gap-3">
+                  <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">Быстро и эффективно</span>
+                </div>
+                <h4 class="mb-3 text-xl font-semibold">Мини и Компакт (Smart, 2 двери)</h4>
+                <p class="mb-5 text-3xl font-semibold text-slate-900">1200 грн</p>
+                <ul class="space-y-2 text-sm text-slate-600">
+                  <li>Полное озонирование салона</li>
+                  <li>Устранение посторонних запахов</li>
+                  <li>Финишная обработка сухим туманом</li>
+                </ul>
+              </article>
+              <article class="rounded-2xl bg-white p-7 shadow-soft ring-1 ring-brand-500/20 transition hover:-translate-y-1 hover:shadow-lg">
+                <div class="mb-5 flex items-center justify-between gap-3">
+                  <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-600">Популярно</span>
+                </div>
+                <h4 class="mb-3 text-xl font-semibold">Хэтчбеки и Седаны</h4>
+                <p class="mb-5 text-3xl font-semibold text-slate-900">1500 грн</p>
+                <ul class="space-y-2 text-sm text-slate-600">
+                  <li>Глубокое озонирование салона</li>
+                  <li>Нейтрализация стойких запахов и бактерий</li>
+                  <li>Обработка сухим туманом для приятного аромата</li>
+                </ul>
+              </article>
+              <article class="rounded-2xl bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:shadow-lg">
+                <div class="mb-5 flex items-center justify-between gap-3">
+                  <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">Максимальный эффект</span>
+                </div>
+                <h4 class="mb-3 text-xl font-semibold">Джипы и Минивэны</h4>
+                <p class="mb-5 text-3xl font-semibold text-slate-900">2000 грн</p>
+                <ul class="space-y-2 text-sm text-slate-600">
+                  <li>Усиленное озонирование большого объема салона</li>
+                  <li>Удаление сложных запахов (включая плесень и грибок)</li>
+                  <li>Премиум-обработка сухим туманом</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+          <div>
+            <h3 class="mb-5 text-2xl font-semibold tracking-tight">Квартиры</h3>
+            <div class="grid gap-6 lg:grid-cols-3">
+              <article class="rounded-2xl bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:shadow-lg">
+                <div class="mb-5 flex items-center justify-between gap-3">
+                  <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">Базовый комфорт</span>
+                </div>
+                <h4 class="mb-3 text-xl font-semibold">1-комнатная квартира</h4>
+                <p class="mb-5 text-3xl font-semibold text-slate-900">3000 грн</p>
+                <ul class="space-y-2 text-sm text-slate-600">
+                  <li>Установка и работа аппарата для озонирования</li>
+                  <li>Проветривание помещения</li>
+                  <li>Нейтрализация запаха озона сухим туманом (по необходимости)</li>
+                </ul>
+              </article>
+              <article class="rounded-2xl bg-white p-7 shadow-soft ring-1 ring-brand-500/20 transition hover:-translate-y-1 hover:shadow-lg">
+                <div class="mb-5 flex items-center justify-between gap-3">
+                  <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-600">Оптимально</span>
+                </div>
+                <h4 class="mb-3 text-xl font-semibold">2-комнатная квартира</h4>
+                <p class="mb-5 text-3xl font-semibold text-slate-900">4000 грн</p>
+                <ul class="space-y-2 text-sm text-slate-600">
+                  <li>Комплексное озонирование комнат, кухни и коридора</li>
+                  <li>Устранение въевшихся бытовых запахов</li>
+                  <li>Финишная обработка сухим туманом для свежести</li>
+                </ul>
+              </article>
+              <article class="rounded-2xl bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:shadow-lg">
+                <div class="mb-5 flex items-center justify-between gap-3">
+                  <span class="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">Выгодное предложение</span>
+                </div>
+                <h4 class="mb-3 text-xl font-semibold">3-комнатная квартира</h4>
+                <p class="mb-5 text-3xl font-semibold text-slate-900">5000 грн</p>
+                <ul class="space-y-2 text-sm text-slate-600">
+                  <li>Глубокая очистка воздуха на большой площади</li>
+                  <li>Уничтожение бактерий, аллергенов и запахов</li>
+                  <li>Закрепление результата сухим туманом</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+          <div>
+            <h3 class="mb-5 text-2xl font-semibold tracking-tight">Гаражи, подвалы и офисы</h3>
+            <article class="rounded-2xl bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:shadow-lg">
+              <div class="mb-5 flex items-center justify-between gap-3">
+                <span class="rounded-full bg-violet-50 px-3 py-1 text-xs font-semibold text-violet-700">Индивидуальный подход</span>
+                <span class="text-sm font-semibold text-slate-500">индивидуальная оценка</span>
+              </div>
+              <h4 class="mb-3 text-xl font-semibold">Очистка гаражей, подвалов и офисов</h4>
+              <p class="mb-5 text-3xl font-semibold text-slate-900">от 2000 грн</p>
+              <ul class="space-y-2 text-sm text-slate-600">
+                <li>Выезд и точный просчет стоимости под объем помещения</li>
+                <li>Мощная обработка озоном от запахов сырости, грибка или химикатов</li>
+                <li>Дополнительная обработка сухим туманом по договоренности</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="mx-auto max-w-4xl px-4 pb-24 sm:px-6 lg:px-8">
+        <div class="mb-10 text-center">
+          <p class="mb-3 text-sm font-medium text-brand-600">FAQ</p>
+          <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">Часто задаваемые вопросы</h2>
+        </div>
+        <div class="space-y-4">
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">В чем разница между озонированием и сухим туманом?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Озонирование уничтожает бактерии и саму причину запаха. Сухой туман закрепляет результат и придает приятный аромат.</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">Можно ли заказать только сухой туман для авто?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Мы всегда рекомендуем комплекс. Только озонирование плюс сухой туман гарантируют полное удаление запаха, а не просто его временную маскировку.</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">От чего зависит цена на обработку машины?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">От размера салона. Для джипов и минивэнов требуется больше времени и больший расход качественных американских жидкостей, чем для компактных авто.</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">Сколько времени занимает чистка салона авто?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Обычно вся процедура, включая финальное проветривание, занимает около 1 часа.</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">Сколько времени длится обработка квартиры?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Сам аппарат может работать от нескольких часов до суток, в зависимости от проблемы. При этом мастер находится на объекте суммарно около часа (привезти, включить, забрать и проветрить).</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">Можно ли находиться в помещении во время работы аппарата?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Нет, это небезопасно. Во время активной фазы озонирования в помещении не должно быть людей и животных.</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">Убивает ли озонирование плесень?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Озон отлично уничтожает споры в воздухе и запах сырости. Но сами очаги грибка мы предварительно обрабатываем специальной химией.</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">Выезжаете ли вы в гаражи, подвалы или офисы?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Да. Мы берем в работу любые помещения. Стоимость рассчитывается индивидуально после оценки площади и масштаба проблемы.</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">Что делать, если дома разбился градусник?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Не собирайте ртуть пылесосом! Мы проводим профессиональную демеркуризацию помещений (нейтрализацию ртути). Услуга стоит от 2500 грн за один разбитый градусник.</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">Зачем вы так подробно расспрашиваете о проблеме по телефону?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Чтобы сразу назвать вам окончательную и точную цену за работу. Мы не меняем стоимость по приезду на объект.</p></div></article>
+          <article class="faq-item rounded-2xl bg-white p-5 shadow-soft"><button class="faq-trigger flex w-full items-center justify-between gap-4 text-left"><span class="text-base font-medium sm:text-lg">Можно ли удешевить обработку многокомнатной квартиры?</span><span class="faq-icon text-2xl leading-none text-slate-400">+</span></button><div class="faq-content max-h-0 overflow-hidden text-slate-600 transition-all duration-300"><p class="pt-4">Да. Чтобы мастеру не приходилось ездить несколько раз, мы можем настроить аппарат по таймеру, а вы (или ваши рабочие) самостоятельно переставите его из комнаты в комнату.</p></div></article>
+        </div>
+      </section>
+
+      <section id="contact" class="mx-auto max-w-5xl px-4 pb-24 sm:px-6 lg:px-8">
+        <div class="rounded-3xl bg-white p-8 shadow-softer sm:p-10">
+          <h2 class="mb-3 text-2xl font-semibold sm:text-3xl">Оставьте заявку</h2>
+          <p class="mb-7 text-slate-600">Свяжемся с вами в течение 10 минут и подберем удобное время обработки.</p>
+          <form id="lead-form" class="grid gap-4 md:grid-cols-4" method="post" novalidate>
+            <label class="sr-only" for="name">Имя</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Ваше имя"
+              class="rounded-xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-500"
+            />
+            <label class="sr-only" for="phone">Телефон</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              required
+              placeholder="Телефон"
+              class="rounded-xl border border-slate-200 px-4 py-3 outline-none transition focus:border-brand-500"
+            />
+            <label class="sr-only" for="service">Услуга</label>
+            <select id="service" name="service" class="rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none transition focus:border-brand-500">
+              <option value="Автомобили">Автомобили</option>
+              <option value="Квартиры">Квартиры</option>
+              <option value="Гаражи, подвалы и офисы">Гаражи, подвалы и офисы</option>
+            </select>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+            <button
+              id="lead-submit"
+              type="submit"
+              class="rounded-xl bg-slate-900 px-5 py-3 font-medium text-white transition hover:bg-slate-800"
+            >
+              Отправить
+            </button>
+          </form>
+          <p id="lead-status" class="mt-4 text-sm text-slate-500" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-200">
+      <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-sm text-slate-500 sm:px-6 lg:px-8">
+        <p>© 2026 DryZone. Все права защищены.</p>
+        <a href="tel:+380991234567" class="transition hover:text-slate-700">+38 (099) 123-45-67</a>
+      </div>
+    </footer>
+
+    <script>
+      const siteHeader = document.getElementById("site-header");
+      const mobileToggle = document.getElementById("mobile-menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const slides = Array.from(document.querySelectorAll(".hero-slide"));
+      const dots = Array.from(document.querySelectorAll(".hero-dot"));
+      const heroAnimated = Array.from(document.querySelectorAll(".hero-animated"));
+      const faqItems = Array.from(document.querySelectorAll(".faq-item"));
+      const leadForm = document.getElementById("lead-form");
+      const leadSubmit = document.getElementById("lead-submit");
+      const leadStatus = document.getElementById("lead-status");
+      let activeSlide = 0;
+      let slideTimer;
+
+      function getTracking() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+          utm_source: params.get("utm_source") || "",
+          utm_medium: params.get("utm_medium") || "",
+          utm_campaign: params.get("utm_campaign") || "",
+          utm_term: params.get("utm_term") || "",
+          utm_content: params.get("utm_content") || "",
+          gclid: params.get("gclid") || "",
+          fbclid: params.get("fbclid") || "",
+        };
+      }
+
+      function syncHeader() {
+        if (window.scrollY > 12) {
+          siteHeader.firstElementChild.firstElementChild.classList.add("bg-white/90", "backdrop-blur", "shadow-soft");
+          siteHeader.firstElementChild.firstElementChild.classList.remove("bg-transparent");
+          return;
+        }
+        siteHeader.firstElementChild.firstElementChild.classList.remove("bg-white/90", "backdrop-blur", "shadow-soft");
+      }
+
+      function animateHeroContent() {
+        heroAnimated.forEach((el, index) => {
+          el.classList.remove("animate-fade-in-up");
+          el.style.animationDelay = `${index * 120}ms`;
+          void el.offsetWidth;
+          el.classList.add("animate-fade-in-up");
+        });
+      }
+
+      function setSlide(nextIndex) {
+        activeSlide = nextIndex;
+        slides.forEach((slide, idx) => {
+          if (idx === activeSlide) {
+            slide.classList.add("opacity-100");
+            slide.classList.remove("opacity-0");
+          } else {
+            slide.classList.remove("opacity-100");
+            slide.classList.add("opacity-0");
+          }
+        });
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle("w-8", idx === activeSlide);
+          dot.classList.toggle("w-2.5", idx !== activeSlide);
+          dot.classList.toggle("bg-white", idx === activeSlide);
+          dot.classList.toggle("bg-white/50", idx !== activeSlide);
+        });
+        animateHeroContent();
+      }
+
+      function restartSlider() {
+        clearInterval(slideTimer);
+        slideTimer = setInterval(() => {
+          setSlide((activeSlide + 1) % slides.length);
+        }, 6000);
+      }
+
+      dots.forEach((dot, idx) => {
+        dot.addEventListener("click", () => {
+          setSlide(idx);
+          restartSlider();
+        });
+      });
+
+      mobileToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      faqItems.forEach((item) => {
+        const trigger = item.querySelector(".faq-trigger");
+        const content = item.querySelector(".faq-content");
+        const icon = item.querySelector(".faq-icon");
+
+        trigger.addEventListener("click", () => {
+          const isOpen = content.style.maxHeight && content.style.maxHeight !== "0px";
+          faqItems.forEach((innerItem) => {
+            const innerContent = innerItem.querySelector(".faq-content");
+            const innerIcon = innerItem.querySelector(".faq-icon");
+            innerContent.style.maxHeight = "0px";
+            innerIcon.textContent = "+";
+          });
+
+          if (!isOpen) {
+            content.style.maxHeight = `${content.scrollHeight + 20}px`;
+            icon.textContent = "−";
+          }
+        });
+      });
+
+      leadForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(leadForm);
+        const name = String(formData.get("name") || "").trim();
+        const phone = String(formData.get("phone") || "").trim();
+        const service = String(formData.get("service") || "").trim();
+        const website = String(formData.get("website") || "").trim();
+
+        if (!name || !phone) {
+          leadStatus.textContent = "Пожалуйста, заполните имя и телефон.";
+          leadStatus.className = "mt-4 text-sm text-red-600";
+          return;
+        }
+
+        const payload = {
+          name,
+          phone,
+          service,
+          website,
+          source: "DryZone landing",
+          pageUrl: window.location.href,
+          createdAt: new Date().toISOString(),
+          ...getTracking(),
+        };
+
+        leadSubmit.disabled = true;
+        leadSubmit.classList.add("opacity-70", "cursor-not-allowed");
+        leadStatus.textContent = "Отправляем заявку...";
+        leadStatus.className = "mt-4 text-sm text-slate-500";
+
+        try {
+          const response = await fetch("/api/lead", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || !result.ok) {
+            throw new Error(result.error || "submit_failed");
+          }
+
+          leadForm.reset();
+          leadStatus.textContent = `Заявка отправлена. Номер: ${result.requestId}.`;
+          leadStatus.className = "mt-4 text-sm text-emerald-600";
+        } catch (error) {
+          const code = error instanceof Error ? error.message : "submit_failed";
+          const map = {
+            rate_limited: "Слишком много попыток. Повторите чуть позже.",
+            duplicate_recent_lead: "Похоже, вы только что уже отправили заявку. Проверьте Telegram/таблицу.",
+            storage_unavailable: "Сервис заявок временно недоступен. Попробуйте через 1-2 минуты.",
+            invalid_phone: "Проверьте номер телефона и попробуйте снова.",
+          };
+          leadStatus.textContent = map[code] || "Не удалось отправить заявку. Попробуйте еще раз.";
+          leadStatus.className = "mt-4 text-sm text-red-600";
+        } finally {
+          leadSubmit.disabled = false;
+          leadSubmit.classList.remove("opacity-70", "cursor-not-allowed");
+        }
+      });
+
+      syncHeader();
+      setSlide(0);
+      restartSlider();
+      window.addEventListener("scroll", syncHeader);
+    </script>
+  </body>
+</html>

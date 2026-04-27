@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
   const phone = normalizePhone(cleanString(payload.phone, 40));
   const service = cleanString(payload.service, 120);
   const website = cleanString(payload.website, 120);
-  const source = cleanString(payload.source || "DryZone landing", 120);
+  const source = cleanString(payload.source || "Лендинг DryZone", 120);
   const createdAt = cleanString(payload.createdAt || new Date().toISOString(), 80);
 
   if (website) return NextResponse.json({ ok: true, ignored: "honeypot" }, { status: 200 });
@@ -158,11 +158,11 @@ export async function POST(request: NextRequest) {
     const safeService = escapeTelegramHtml(service || "-");
     await notifyTelegram(
       [
-        "📩 <b>Новая заявка DryZone</b>",
+        "📩 <b>Нова заявка DryZone</b>",
         `ID: <code>${requestId}</code>`,
-        `Имя: ${safeName}`,
+        `Ім’я: ${safeName}`,
         `Телефон: ${safePhone}`,
-        `Услуга: ${safeService}`,
+        `Послуга: ${safeService}`,
       ].join("\n"),
     );
     return NextResponse.json({ ok: true, requestId }, { status: 200 });

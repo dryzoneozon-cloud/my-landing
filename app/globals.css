@@ -8,7 +8,7 @@
 @keyframes fade-in-up {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(8px);
   }
   100% {
     opacity: 1;
@@ -22,14 +22,15 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  --color-brand-50: #f0fdfa;
-  --color-brand-500: #0ea5a4;
-  --color-brand-600: #0d9488;
+  /* Стриманий «корпоративний» акцент замість бірюзи */
+  --color-brand-50: #f8fafc;
+  --color-brand-500: #475569;
+  --color-brand-600: #334155;
 
-  --shadow-soft: 0 8px 30px rgba(15, 23, 42, 0.08);
-  --shadow-softer: 0 16px 40px rgba(15, 23, 42, 0.06);
+  --shadow-soft: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-softer: 0 1px 3px rgba(15, 23, 42, 0.08);
 
-  --animate-fade-in-up: fade-in-up 0.7s ease forwards;
+  --animate-fade-in-up: fade-in-up 0.45s ease-out forwards;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,7 +43,7 @@
 body {
   margin: 0;
   min-height: 100%;
-  background: #f8fafc;
+  background: #fafafa;
   color: #0f172a;
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }

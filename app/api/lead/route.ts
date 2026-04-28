@@ -6,6 +6,7 @@ type LeadPayload = {
   name?: string;
   phone?: string;
   service?: string;
+  object?: string;
   source?: string;
   createdAt?: string;
   pageUrl?: string;
@@ -24,10 +25,13 @@ type RateEntry = { startsAt: number; count: number };
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 30;
 const DEDUPE_MS = 30 * 1000;
+const CLEANUP_INTERVAL_MS = 60 * 1000;
+const MAX_STORE_KEYS = 10_000;
 
 const globalState = globalThis as typeof globalThis & {
   __leadRateLimit?: Map<string, RateEntry>;
   __leadDedupe?: Map<string, number>;
+  __leadCleanupAt?: number;
 };
 
 const rateLimitStore = globalState.__leadRateLimit ?? new Map<string, RateEntry>();
@@ -35,6 +39,39 @@ globalState.__leadRateLimit = rateLimitStore;
 
 const dedupeStore = globalState.__leadDedupe ?? new Map<string, number>();
 globalState.__leadDedupe = dedupeStore;
+
+function cleanupStores(now: number) {
+  const last = globalState.__leadCleanupAt ?? 0;
+  if (now - last < CLEANUP_INTERVAL_MS) return;
+  globalState.__leadCleanupAt = now;
+
+  for (const [ip, entry] of rateLimitStore) {
+    if (now - entry.startsAt > WINDOW_MS * 2) rateLimitStore.delete(ip);
+  }
+  for (const [phone, ts] of dedupeStore) {
+    if (now - ts > DEDUPE_MS) dedupeStore.delete(phone);
+  }
+
+  // Hard cap to avoid pathological memory growth.
+  if (rateLimitStore.size > MAX_STORE_KEYS) {
+    let i = 0;
+    for (const key of rateLimitStore.keys()) {
+      rateLimitStore.delete(key);
+      i += 1;
+      if (rateLimitStore.size <= MAX_STORE_KEYS) break;
+      if (i > MAX_STORE_KEYS) break;
+    }
+  }
+  if (dedupeStore.size > MAX_STORE_KEYS) {
+    let i = 0;
+    for (const key of dedupeStore.keys()) {
+      dedupeStore.delete(key);
+      i += 1;
+      if (dedupeStore.size <= MAX_STORE_KEYS) break;
+      if (i > MAX_STORE_KEYS) break;
+    }
+  }
+}
 
 function cleanString(value: unknown, maxLength = 500): string {
   return String(value ?? "").trim().slice(0, maxLength);
@@ -85,9 +122,12 @@ async function sendToGoogleSheets(data: Record<string, string>): Promise<void> {
   const webhookUrl = process.env.GOOGLE_SCRIPT_WEBHOOK_URL;
   if (!webhookUrl) throw new Error("GOOGLE_SCRIPT_WEBHOOK_URL is not configured");
 
+  const controller = AbortSignal.timeout(8000);
   const response = await fetch(webhookUrl, {
     method: "POST",
     body: new URLSearchParams(data),
+    cache: "no-store",
+    signal: controller,
   });
   if (!response.ok) throw new Error(`Sheets webhook failed: ${response.status}`);
 }
@@ -97,16 +137,20 @@ async function notifyTelegram(message: string): Promise<void> {
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!botToken || !chatId) return;
 
+  const controller = AbortSignal.timeout(8000);
   const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: "HTML" }),
+    cache: "no-store",
+    signal: controller,
   });
   if (!response.ok) throw new Error(`Telegram failed: ${response.status}`);
 }
 
 export async function POST(request: NextRequest) {
   const now = Date.now();
+  cleanupStores(now);
   const ip = getIp(request);
   let payload: LeadPayload;
 
@@ -119,6 +163,7 @@ export async function POST(request: NextRequest) {
   const name = cleanString(payload.name, 120);
   const phone = normalizePhone(cleanString(payload.phone, 40));
   const service = cleanString(payload.service, 120);
+  const object = cleanString(payload.object, 120);
   const website = cleanString(payload.website, 120);
   const source = cleanString(payload.source || "Лендинг DryZone", 120);
   const createdAt = cleanString(payload.createdAt || new Date().toISOString(), 80);
@@ -137,6 +182,7 @@ export async function POST(request: NextRequest) {
     name,
     phone,
     service,
+    object,
     source,
     pageUrl: cleanString(payload.pageUrl, 300),
     ip,
@@ -156,6 +202,7 @@ export async function POST(request: NextRequest) {
     const safeName = escapeTelegramHtml(name);
     const safePhone = escapeTelegramHtml(phone);
     const safeService = escapeTelegramHtml(service || "-");
+    const safeObject = escapeTelegramHtml(object || "-");
     await notifyTelegram(
       [
         "📩 <b>Нова заявка DryZone</b>",
@@ -163,6 +210,7 @@ export async function POST(request: NextRequest) {
         `Ім’я: ${safeName}`,
         `Телефон: ${safePhone}`,
         `Послуга: ${safeService}`,
+        `Об’єкт: ${safeObject}`,
       ].join("\n"),
     );
     return NextResponse.json({ ok: true, requestId }, { status: 200 });

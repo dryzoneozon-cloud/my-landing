@@ -1,5 +1,5 @@
-import { DryZoneLanding } from "./dry-zone-landing";
+import { LandingPage } from "./landing/landing-page";
 
 export default function Home() {
-  return <DryZoneLanding />;
+  return <LandingPage />;
 }

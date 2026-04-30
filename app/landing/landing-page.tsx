@@ -2,6 +2,9 @@ import { HeaderClient } from "./header-client";
 import { HeroClient, type HeroSlide } from "./hero-client";
 import { FaqClient, type FaqItem } from "./faq-client";
 import { LeadFormClient } from "./lead-form-client";
+import Image from "next/image";
+
+const LOGO_SRC = "/photo_2026-04-30_17-57-51.png";
 
 const LIST_CHECK =
   "space-y-2 text-sm leading-relaxed text-slate-600 [&>li]:relative [&>li]:pl-5 [&>li]:before:absolute [&>li]:before:left-0 [&>li]:before:top-[0.45rem] [&>li]:before:size-1.5 [&>li]:before:rounded-full [&>li]:before:bg-slate-800";
@@ -76,7 +79,7 @@ const FAQS: FaqItem[] = [
 
 export function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50 text-slate-900 antialiased">
+    <div className="flex min-h-screen flex-col bg-zinc-50 text-slate-900 antialiased selection:bg-slate-900 selection:text-white">
       <HeaderClient />
 
       <main className="flex-1">
@@ -84,7 +87,7 @@ export function LandingPage() {
 
         <section id="services" className="scroll-mt-24 border-t border-slate-200 bg-white">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
-            <div className="mb-12 max-w-2xl border-l-2 border-slate-900 pl-5">
+            <div className="mb-12 max-w-2xl border-l-2 border-slate-900/90 pl-5">
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-slate-500">Послуги та ціни</p>
               <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
                 Прозорий прайс під тип приміщення
@@ -96,8 +99,8 @@ export function LandingPage() {
 
             <div id="formats" className="mb-16 scroll-mt-24">
               <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Технології</h3>
-              <div className="grid overflow-hidden rounded-2xl border border-slate-200 md:grid-cols-2">
-                <article className="border-b border-slate-200 bg-zinc-50/50 p-8 md:border-b-0 md:border-r md:border-slate-200">
+              <div className="grid overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.06)] md:grid-cols-2">
+                <article className="border-b border-slate-200 bg-zinc-50/60 p-8 md:border-b-0 md:border-r md:border-slate-200">
                   <p className="text-[11px] font-medium uppercase tracking-widest text-slate-500">Етап 1</p>
                   <h3 className="mt-2 text-lg font-semibold tracking-tight text-slate-900">Озонація</h3>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">
@@ -110,7 +113,7 @@ export function LandingPage() {
                     Заявка
                   </a>
                 </article>
-                <article className="p-8">
+                <article className="bg-white p-8">
                   <p className="text-[11px] font-medium uppercase tracking-widest text-slate-500">Етап 2</p>
                   <h3 className="mt-2 text-lg font-semibold tracking-tight text-slate-900">Сухий туман</h3>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">
@@ -131,7 +134,7 @@ export function LandingPage() {
               <div>
                 <h3 className="mb-6 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Автомобілі</h3>
                 <div className="grid gap-3 sm:grid-cols-3">
-                  <article className="rounded-2xl border border-slate-200 bg-white p-6">
+                  <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500">Компакт</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Міні, Smart, 2 двері</h4>
                     <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">1200 грн</p>
@@ -141,7 +144,7 @@ export function LandingPage() {
                       <li>Фініш сухим туманом</li>
                     </ul>
                   </article>
-                  <article className="rounded-2xl border-2 border-slate-900 bg-white p-6">
+                  <article className="rounded-2xl border-2 border-slate-900 bg-white p-6 shadow-[0_10px_40px_rgba(15,23,42,0.10)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-600">Стандарт</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Хетчбеки, седани</h4>
                     <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">1500 грн</p>
@@ -151,7 +154,7 @@ export function LandingPage() {
                       <li>Сухий туман</li>
                     </ul>
                   </article>
-                  <article className="rounded-2xl border border-slate-200 bg-white p-6">
+                  <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500">Об’єм</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Джипи, мінівени</h4>
                     <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">2000 грн</p>
@@ -167,7 +170,7 @@ export function LandingPage() {
               <div>
                 <h3 className="mb-6 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Квартири</h3>
                 <div className="grid gap-3 sm:grid-cols-3">
-                  <article className="rounded-2xl border border-slate-200 bg-white p-6">
+                  <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500">1 кімната</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Базовий пакет</h4>
                     <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">3000 грн</p>
@@ -177,7 +180,7 @@ export function LandingPage() {
                       <li>Сухий туман за потреби</li>
                     </ul>
                   </article>
-                  <article className="rounded-2xl border-2 border-slate-900 bg-white p-6">
+                  <article className="rounded-2xl border-2 border-slate-900 bg-white p-6 shadow-[0_10px_40px_rgba(15,23,42,0.10)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-600">2 кімнати</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Комплекс</h4>
                     <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">4000 грн</p>
@@ -187,7 +190,7 @@ export function LandingPage() {
                       <li>Фініш сухим туманом</li>
                     </ul>
                   </article>
-                  <article className="rounded-2xl border border-slate-200 bg-white p-6">
+                  <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500">3 кімнати</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Повна площа</h4>
                     <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">5000 грн</p>
@@ -204,7 +207,7 @@ export function LandingPage() {
                 <h3 className="mb-6 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
                   Гаражі, підвали, офіси
                 </h3>
-                <article className="rounded-2xl border border-slate-200 bg-zinc-50/50 p-6">
+                <article className="rounded-2xl border border-slate-200 bg-zinc-50/60 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)]">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <h4 className="text-base font-semibold text-slate-900">Індивідуальний розрахунок</h4>
                     <span className="text-sm text-slate-500">за оглядом об’єкта</span>
@@ -225,7 +228,7 @@ export function LandingPage() {
           <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
             <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Питання</h2>
             <p className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">Часті запитання</p>
-            <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+            <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.06)]">
               <FaqClient items={FAQS} />
             </div>
           </div>
@@ -233,7 +236,7 @@ export function LandingPage() {
 
         <section id="contact" className="scroll-mt-24 border-t border-slate-200 bg-white">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
-            <div className="max-w-2xl rounded-2xl border border-slate-200 bg-zinc-50/30 p-8 sm:p-10">
+            <div className="max-w-2xl rounded-2xl border border-slate-200 bg-zinc-50/40 p-8 shadow-[0_1px_2px_rgba(15,23,42,0.06)] sm:p-10">
               <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">Заявка</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 Зв’яжемося протягом 10 хвилин і погодимо час виїзду.
@@ -247,7 +250,12 @@ export function LandingPage() {
       <footer className="border-t border-slate-200 bg-slate-50/80">
         <div className="mx-auto max-w-7xl px-4 py-8 text-sm text-slate-500 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <p className="font-medium text-slate-700">© 2026 DryZone</p>
+            <div className="flex items-center gap-3">
+              <span className="relative h-12 w-12 overflow-hidden rounded-2xl bg-white p-1.5 shadow-md ring-1 ring-slate-200">
+                <Image src={LOGO_SRC} alt="DryZone" fill sizes="48px" className="object-contain" />
+              </span>
+              <p className="font-medium text-slate-700">© 2026 DryZone</p>
+            </div>
             <a href="tel:+380633469005" className="font-medium text-slate-700 transition hover:text-slate-900">
               +38 (063) 346-90-05
             </a>

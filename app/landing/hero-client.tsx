@@ -16,6 +16,7 @@ export function HeroClient({ slides }: { slides: HeroSlide[] }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const heroRefs = useRef<(HTMLElement | null)[]>([]);
   const slideTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const safeActiveSlide = slides.length > 0 ? activeSlide % slides.length : 0;
 
   const setHeroRef = useCallback((index: number) => (el: HTMLElement | null) => {
     heroRefs.current[index] = el;
@@ -26,13 +27,13 @@ export function HeroClient({ slides }: { slides: HeroSlide[] }) {
       if (!el) return;
       el.classList.remove("animate-fade-in-up");
       el.style.animationDelay = `${index * 120}ms`;
-      // eslint-disable-next-line no-void
-      void el.offsetWidth;
+      el.getBoundingClientRect();
       el.classList.add("animate-fade-in-up");
     });
   }, []);
 
   const restartSlider = useCallback(() => {
+    if (slides.length < 2) return;
     if (slideTimerRef.current) clearInterval(slideTimerRef.current);
     slideTimerRef.current = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
@@ -50,6 +51,8 @@ export function HeroClient({ slides }: { slides: HeroSlide[] }) {
     };
   }, [restartSlider]);
 
+  if (slides.length === 0) return null;
+
   return (
     <section id="hero" className="relative min-h-screen scroll-mt-24 pt-[4.5rem]">
       <div className="absolute inset-0">
@@ -57,7 +60,7 @@ export function HeroClient({ slides }: { slides: HeroSlide[] }) {
           <div
             key={slide.bg}
             className={`hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-out ${
-              idx === activeSlide ? "opacity-100" : "opacity-0"
+              idx === safeActiveSlide ? "opacity-100" : "opacity-0"
             }`}
             style={{ backgroundImage: slide.bg }}
           />
@@ -71,19 +74,19 @@ export function HeroClient({ slides }: { slides: HeroSlide[] }) {
             ref={setHeroRef(0)}
             className="hero-animated mb-5 text-[11px] font-medium uppercase tracking-[0.22em] text-slate-400 opacity-0"
           >
-            {slides[activeSlide].badge}
+            {slides[safeActiveSlide].badge}
           </p>
           <h1
             ref={setHeroRef(1)}
             className="hero-animated mb-5 text-3xl font-semibold leading-[1.15] tracking-tight opacity-0 sm:text-4xl md:text-[2.65rem]"
           >
-            {slides[activeSlide].title}
+            {slides[safeActiveSlide].title}
           </h1>
           <p
             ref={setHeroRef(2)}
             className="hero-animated mb-10 max-w-md text-[15px] font-normal leading-relaxed text-slate-300 opacity-0"
           >
-            {slides[activeSlide].text}
+            {slides[safeActiveSlide].text}
           </p>
           <div ref={setHeroRef(3)} className="hero-animated flex flex-wrap gap-3 opacity-0">
             <a
@@ -108,7 +111,7 @@ export function HeroClient({ slides }: { slides: HeroSlide[] }) {
             key={slide.badge}
             type="button"
             className={`h-px transition-all duration-300 ${
-              idx === activeSlide ? "w-10 bg-white" : "w-4 bg-white/35 hover:bg-white/50"
+              idx === safeActiveSlide ? "w-10 bg-white" : "w-4 bg-white/35 hover:bg-white/50"
             }`}
             aria-label={`Слайд ${idx + 1}`}
             onClick={() => {

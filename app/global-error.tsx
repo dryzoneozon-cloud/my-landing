@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 
 import "./globals.css";
 
@@ -32,12 +33,12 @@ export default function GlobalError({
             >
               Спробувати ще раз
             </button>
-            <a
+            <Link
               href="/"
               className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-medium uppercase tracking-wide text-slate-900 transition hover:border-slate-400"
             >
               На головну
-            </a>
+            </Link>
           </div>
           {error.digest ? (
             <p className="mt-6 text-xs text-slate-500">

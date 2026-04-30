@@ -1,10 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+
+const LOGO_SRC = "/photo_2026-04-30_17-57-51.png";
 
 export function HeaderClient() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [headerOnLight, setHeaderOnLight] = useState(false);
+  const [logoFailed, setLogoFailed] = useState(false);
   const headerOnLightRef = useRef(false);
   const tickingRef = useRef(false);
 
@@ -34,18 +38,31 @@ export function HeaderClient() {
   return (
     <header
       id="site-header"
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
-        headerOnLight ? "border-slate-200 bg-white" : "border-white/10 bg-slate-950"
+      className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur transition-colors duration-200 ${
+        headerOnLight ? "border-slate-200/80 bg-white/85" : "border-white/10 bg-slate-950/70"
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-3.5 sm:px-6">
-        <a
-          href="#"
-          className={`shrink-0 text-[15px] font-semibold tracking-tight ${
-            headerOnLight ? "text-slate-900" : "text-white"
-          }`}
-        >
-          Dry<span className={headerOnLight ? "text-slate-600" : "text-slate-400"}>Zone</span>
+        <a href="#" className="shrink-0" aria-label="DryZone">
+          <span className="flex items-center">
+            <span className="relative h-12 w-12 overflow-hidden rounded-2xl bg-white p-1.5 shadow-md ring-1 ring-slate-200/70">
+              {logoFailed ? (
+                <span className="flex h-full w-full items-center justify-center text-[12px] font-semibold tracking-wide text-slate-700">
+                  DZ
+                </span>
+              ) : (
+                <Image
+                  src={LOGO_SRC}
+                  alt="DryZone"
+                  fill
+                  sizes="48px"
+                  className="object-contain"
+                  priority
+                  onError={() => setLogoFailed(true)}
+                />
+              )}
+            </span>
+          </span>
         </a>
 
         <nav
@@ -75,10 +92,10 @@ export function HeaderClient() {
             +38 (063) 346-90-05
           </a>
           <a
-            className={`rounded-lg px-3 py-1.5 text-[13px] font-medium uppercase tracking-wide transition ${
+            className={`rounded-lg px-3 py-1.5 text-[13px] font-medium uppercase tracking-wide shadow-sm transition ${
               headerOnLight
                 ? "border border-slate-900 bg-slate-900 text-white hover:bg-slate-800"
-                : "border border-white/30 text-white hover:border-white/60"
+                : "border border-white/30 text-white hover:border-white/60 hover:bg-white/5"
             }`}
             href="#contact"
           >
@@ -102,7 +119,7 @@ export function HeaderClient() {
       </div>
 
       <nav
-        className={`border-t border-slate-200 bg-white px-4 py-3 md:hidden ${mobileOpen ? "" : "hidden"}`}
+        className={`border-t border-slate-200 bg-white/95 px-4 py-3 md:hidden ${mobileOpen ? "" : "hidden"}`}
         id="mobile-menu"
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-3 text-sm text-slate-800">

@@ -43,6 +43,14 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - Server forwards lead to Google Sheets webhook
 - Optional Telegram alerts on new lead
 
+### Note on Vercel deployments
+
+The current rate limit / dedupe logic is implemented in-memory in the API route. This is fine as a minimal anti-spam measure, but on Vercel (serverless / multiple instances) it is **best-effort** and can be bypassed by distributing requests across instances or after cold starts. If you need stronger protection later, add a shared store (KV/Redis) or a CAPTCHA/Turnstile.
+
+### `index.html`
+
+`index.html` in the repository root is a legacy static prototype. The real Next.js app is served from the `app/` directory (`app/page.tsx`).
+
 ### Environment
 
 Copy `.env.example` into `.env.local` and fill values:

@@ -81,6 +81,8 @@ export function LeadFormClient() {
         invalid_phone: "Перевірте номер телефону й спробуйте ще раз.",
         name_and_phone_required: "Вкажіть ім’я та телефон.",
         invalid_json: "Помилка надсилання даних. Оновіть сторінку й спробуйте ще раз.",
+        invalid_service: "Обрана недопустима послуга.",
+        invalid_object: "Обраний недопустимий об'єкт.",
       };
       setLeadStatus({
         text: map[code] || "Не вдалося надіслати заявку. Спробуйте ще раз.",

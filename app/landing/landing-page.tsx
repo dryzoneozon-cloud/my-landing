@@ -13,20 +13,20 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     bg: "linear-gradient(165deg, #0f172a 0%, #1e293b 55%, #0f172a 100%)",
     badge: "Озонація · сухий туман · виїзд",
-    title: "Глибока озонація салону авто без зайвої хімії",
-    text: "Професійна обробка озоном з виїздом по Києву. Чисте повітря та свіжий салон уже за 30 хвилин.",
+    title: "Глибоке очищення та озонація в Києві",
+    text: "Шукаєте ефективний спосіб дихати чистим повітрям? Наша служба пропонує професійну озонацію та сухий туман у Києві та Київській області.",
   },
   {
     bg: "linear-gradient(165deg, #111827 0%, #1f2937 50%, #111827 100%)",
     badge: "Комплекс для авто та приміщень",
     title: "Озон + сухий туман — стійкий результат",
-    text: "Спочатку нейтралізуємо джерело запаху, потім м'яко закріплюємо ефект і повертаємо приємний аромат салону чи квартири.",
+    text: "Ефективне видалення запаху диму, обробка після пожежі та очищення кондиціонера авто. Безпечно для дітей та тварин після провітрювання.",
   },
   {
     bg: "linear-gradient(165deg, #0c1222 0%, #1a2332 50%, #0c1222 100%)",
-    badge: "Квартири · офіси · гаражі",
-    title: "Виїзд майстра та оцінка вартості",
-    text: "Підбираємо оптимальний сценарій обробки під вашу площу та проблему. Точна ціна формується виключно після огляду об'єкта та оцінки обсягу робіт.",
+    badge: "Квартири · авто · демеркуризація",
+    title: "Безпечне знищення запахів та збір ртуті",
+    text: "Розбився градусник? Ми допоможемо зібрати ртуть та проведемо вимірювання парів. Точна ціна всіх послуг формується після огляду.",
   },
 ];
 
@@ -90,7 +90,7 @@ export function LandingPage() {
             <div className="mb-12 max-w-2xl border-l-2 border-slate-900/90 pl-5">
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-slate-500">Послуги та ціни</p>
               <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-                Орієнтовна вартість під тип приміщення
+                Озонація приміщень та автомобілів
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
                 Фіксована вартість для типових сценаріїв; для великих та нестандартних об'єктів — фінальний кошторис формується після огляду.
@@ -99,32 +99,41 @@ export function LandingPage() {
 
             <div id="formats" className="mb-16 scroll-mt-24">
               <h3 className="mb-4 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Технології</h3>
-              <div className="grid overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.06)] md:grid-cols-2">
+              <div className="grid overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.06)] md:grid-cols-3">
                 <article className="border-b border-slate-200 bg-zinc-50/60 p-8 md:border-b-0 md:border-r md:border-slate-200">
-                  <p className="text-[11px] font-medium uppercase tracking-widest text-slate-500">Етап 1</p>
                   <h3 className="mt-2 text-lg font-semibold tracking-tight text-slate-900">Озонація</h3>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                    Знищення бактерій і молекул запаху. Для стійких запахів і підготовки до фінішної обробки.
+                    Шукаєте ефективний спосіб дихати чистим повітрям? Професійна озонація в Києві та області. Допоможемо прибрати запах сигарет, провести очищення кондиціонера авто та забезпечити знищення плісняви. Незамінна обробка після пожежі.
                   </p>
                   <a
                     href="#contact"
                     className="mt-6 inline-block text-xs font-medium uppercase tracking-wide text-slate-900 underline decoration-slate-400 underline-offset-4 hover:decoration-slate-900"
                   >
-                    Оформити замовлення
+                    Замовити озонацію
                   </a>
                 </article>
-                <article className="bg-white p-8">
-                  <p className="text-[11px] font-medium uppercase tracking-widest text-slate-500">Етап 2</p>
+                <article className="border-b border-slate-200 bg-white p-8 md:border-b-0 md:border-r md:border-slate-200">
                   <h3 className="mt-2 text-lg font-semibold tracking-tight text-slate-900">Сухий туман</h3>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                    Закріплення ефекту озонування, пом'якшення запаху озону, нейтральний «чистий» фон без різкої
-                    хімії.
+                    Інноваційна технологія для повного видалення запаху диму, зіпсованих продуктів чи вогкості. Оперативно виїжджаємо в будь-який район Києва. Засіб гіпоалергенний і не залишає слідів на поверхнях в авто чи квартирі.
                   </p>
                   <a
                     href="#contact"
                     className="mt-6 inline-block text-xs font-medium uppercase tracking-wide text-slate-900 underline decoration-slate-400 underline-offset-4 hover:decoration-slate-900"
                   >
-                    Оформити замовлення
+                    Замовити сухий туман
+                  </a>
+                </article>
+                <article className="bg-zinc-50/60 p-8">
+                  <h3 className="mt-2 text-lg font-semibold tracking-tight text-slate-900">Демеркуризація</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                    Випадково розбився градусник? Не намагайтеся зібрати ртуть самостійно! Наші фахівці проводять демеркуризацію в Києві та області. Збираємо небезпечний метал та проводимо вимірювання парів ртуті газоаналізатором.
+                  </p>
+                  <a
+                    href="#contact"
+                    className="mt-6 inline-block text-xs font-medium uppercase tracking-wide text-slate-900 underline decoration-slate-400 underline-offset-4 hover:decoration-slate-900"
+                  >
+                    Викликати службу
                   </a>
                 </article>
               </div>
@@ -226,8 +235,8 @@ export function LandingPage() {
 
         <section id="faq" className="scroll-mt-24 border-t border-slate-200 bg-zinc-50">
           <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-            <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Питання</h2>
-            <p className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">Часті запитання</p>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Питання</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">Відгуки наших клієнтів та FAQ</h2>
             <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.06)]">
               <FaqClient items={FAQS} />
             </div>

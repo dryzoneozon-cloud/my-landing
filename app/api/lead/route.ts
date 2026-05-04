@@ -176,7 +176,8 @@ function getIp(request: NextRequest): string {
 }
 
 function createRequestId(): string {
-  return `dz_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  const num = Math.floor(1000 + Math.random() * 9000);
+  return `DZ-${num}`;
 }
 
 /** Escape user text for Telegram HTML parse_mode. */

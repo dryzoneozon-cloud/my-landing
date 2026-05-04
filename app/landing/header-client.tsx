@@ -99,7 +99,7 @@ export function HeaderClient() {
             }`}
             href="#contact"
           >
-            Заявка
+            Замовлення
           </a>
         </div>
 

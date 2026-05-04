@@ -93,13 +93,13 @@ export function HeroClient({ slides }: { slides: HeroSlide[] }) {
               href="#contact"
               className="rounded-xl border border-white bg-white px-5 py-2.5 text-[13px] font-medium uppercase tracking-wide text-slate-900 transition hover:bg-slate-100"
             >
-              Заявка
+              Замовлення
             </a>
             <a
               href="#services"
               className="rounded-xl border border-white/35 px-5 py-2.5 text-[13px] font-medium uppercase tracking-wide text-white transition hover:border-white/60 hover:bg-white/5"
             >
-              Прайс
+              Ціни
             </a>
           </div>
         </div>

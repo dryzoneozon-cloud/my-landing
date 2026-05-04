@@ -119,17 +119,17 @@ const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_A
 const redis =
   redisUrl && redisToken
     ? new Redis({
-        url: redisUrl,
-        token: redisToken,
-      })
+      url: redisUrl,
+      token: redisToken,
+    })
     : null;
 
 const ratelimit = redis
   ? new Ratelimit({
-      redis,
-      limiter: Ratelimit.slidingWindow(MAX_REQUESTS_PER_WINDOW, "1 h"),
-      analytics: false,
-    })
+    redis,
+    limiter: Ratelimit.slidingWindow(MAX_REQUESTS_PER_WINDOW, "1 h"),
+    analytics: false,
+  })
   : null;
 
 async function checkRateLimitAndDedupe(
@@ -145,7 +145,7 @@ async function checkRateLimitAndDedupe(
     const dedupeKey = `dedupe_${phone}`;
     const isDuplicate = await redis.get(dedupeKey);
     if (isDuplicate) return { limited: false, duplicate: true };
-    
+
     await redis.set(dedupeKey, "1", { px: DEDUPE_MS });
     return { limited: false, duplicate: false };
   } else {
@@ -201,7 +201,7 @@ async function sendToGoogleSheets(data: Record<string, string>): Promise<void> {
 async function notifyTelegram(message: string): Promise<void> {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
-  
+
   if (!botToken || !chatId) {
     console.warn("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is missing. Skipping Telegram notification.");
     return;
@@ -216,7 +216,7 @@ async function notifyTelegram(message: string): Promise<void> {
       cache: "no-store",
       signal: controller,
     });
-    
+
     if (!response.ok) {
       const text = await response.text();
       console.error(`Telegram API failed: ${response.status} - ${text}`);
@@ -253,11 +253,11 @@ export async function POST(request: NextRequest) {
 
   // Honeypot check
   if (website) return NextResponse.json({ ok: true, ignored: "honeypot" }, { status: 200, headers: corsHeaders });
-  
+
   // Basic validation
   if (!name || !phone) return NextResponse.json({ ok: false, error: "name_and_phone_required" }, { status: 400, headers: corsHeaders });
   if (phone.length < 10) return NextResponse.json({ ok: false, error: "invalid_phone" }, { status: 400, headers: corsHeaders });
-  
+
   // Strict Enum Validation
   if (service && !VALID_SERVICES.includes(service)) {
     return NextResponse.json({ ok: false, error: "invalid_service" }, { status: 400, headers: corsHeaders });
@@ -268,7 +268,7 @@ export async function POST(request: NextRequest) {
 
   // Rate Limiting & Deduplication (Redis or Memory)
   const { limited, duplicate } = await checkRateLimitAndDedupe(ip, phone, now);
-  
+
   if (limited) return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429, headers: corsHeaders });
   if (duplicate) return NextResponse.json({ ok: false, error: "duplicate_recent_lead" }, { status: 409, headers: corsHeaders });
 
@@ -296,12 +296,12 @@ export async function POST(request: NextRequest) {
 
   try {
     await sendToGoogleSheets(leadData);
-    
+
     const safeName = escapeTelegramHtml(name);
     const safePhone = escapeTelegramHtml(phone);
     const safeService = escapeTelegramHtml(service || "-");
     const safeObject = escapeTelegramHtml(object || "-");
-    
+
     await notifyTelegram(
       [
         "📩 <b>Нова заявка DryZone</b>",
@@ -312,7 +312,7 @@ export async function POST(request: NextRequest) {
         `Об’єкт: ${safeObject}`,
       ].join("\n"),
     );
-    
+
     return NextResponse.json({ ok: true, requestId }, { status: 200, headers: corsHeaders });
   } catch (error) {
     console.error("lead_save_failed", { requestId, error: String(error) });

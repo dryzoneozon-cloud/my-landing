@@ -51,7 +51,7 @@ export function LeadFormClient() {
     };
 
     setSubmitting(true);
-    setLeadStatus({ text: "Надсилаємо заявку...", tone: "muted" });
+    setLeadStatus({ text: "Надсилаємо замовлення...", tone: "muted" });
 
     try {
       const response = await fetch("/api/lead", {
@@ -69,7 +69,7 @@ export function LeadFormClient() {
       }
       form.reset();
       setLeadStatus({
-        text: `Заявку надіслано. Номер: ${result.requestId}.`,
+        text: `Замовлення надіслано. Номер: ${result.requestId}.`,
         tone: "ok",
       });
     } catch (err) {
@@ -150,6 +150,7 @@ export function LeadFormClient() {
             <option value="Сухий туман">Сухий туман</option>
             <option value="Озонація">Озонація</option>
             <option value="Комплекс">Комплекс</option>
+            <option value="Демеркуризація">Демеркуризація</option>
           </select>
         </div>
 

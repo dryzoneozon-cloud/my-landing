@@ -20,13 +20,13 @@ const HERO_SLIDES: HeroSlide[] = [
     bg: "linear-gradient(165deg, #111827 0%, #1f2937 50%, #111827 100%)",
     badge: "Комплекс для авто та приміщень",
     title: "Озон + сухий туман — стійкий результат",
-    text: "Спочатку нейтралізуємо джерело запаху, потім м’яко закріплюємо ефект і повертаємо приємний аромат салону чи квартири.",
+    text: "Спочатку нейтралізуємо джерело запаху, потім м'яко закріплюємо ефект і повертаємо приємний аромат салону чи квартири.",
   },
   {
     bg: "linear-gradient(165deg, #0c1222 0%, #1a2332 50%, #0c1222 100%)",
     badge: "Квартири · офіси · гаражі",
-    title: "Виїзд і прозорий прайс телефоном",
-    text: "Підбираємо сценарій під площу й тип задачі. Вартість фіксуємо наперед — без сюрпризів на об’єкті.",
+    title: "Виїзд майстра та оцінка вартості",
+    text: "Підбираємо оптимальний сценарій обробки під вашу площу та проблему. Точна ціна формується виключно після огляду об'єкта та оцінки обсягу робіт.",
   },
 ];
 
@@ -45,11 +45,11 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "Скільки часу займає чистка салону авто?",
-    a: "Зазвичай уся процедура, включно з фінальним провітрюванням, займає близько 1 години.",
+    a: "В середньому вся процедура, включно з фінальним провітрюванням, займає близько 2 годин.",
   },
   {
     q: "Скільки триває обробка квартири?",
-    a: "Сам апарат може працювати від кількох годин до доби залежно від проблеми. Майстер на об'єкті сумарно близько години (привезти, увімкнути, забрати й провітрити).",
+    a: "Час роботи залежить від площі та проблеми. Апарат може працювати від кількох годин до доби. При цьому присутність майстра потрібна лише на початку (для налаштування) і в кінці (для провітрювання) — сумарно це близько 1 години.",
   },
   {
     q: "Чи можна перебувати в приміщенні під час роботи апарату?",
@@ -57,7 +57,7 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "Чи знищує озонування цвіль?",
-    a: "Озон добре знищує спори в повітрі й запах сирості. Але самі вогнища грибка ми попередньо обробляємо спеціальною хімією.",
+    a: "Озон ефективно знищує спори цвілі в повітрі та прибирає затхлий запах. Проте для повного вирішення проблеми самі вогнища грибка на стінах чи поверхнях необхідно попередньо обробити спеціальною антигрибковою хімією.",
   },
   {
     q: "Чи виїжджаєте в гаражі, підвали чи офіси?",
@@ -65,7 +65,7 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "Що робити, якщо вдома розбився градусник?",
-    a: "Не збирайте ртуть пилососом! Проводимо професійну демеркуризацію (нейтралізацію ртути). Послуга від 2500 грн за один розбитий градусник.",
+    a: "Не намагайтеся зібрати ртуть самостійно пилососом чи віником, це лише погіршить ситуацію. Ми проводимо професійну демеркуризацію приміщення спеціальними розчинами, які повністю нейтралізують пари ртуті та роблять простір безпечним.",
   },
   {
     q: "Навіщо ви так детально розпитуєте про проблему телефоном?",
@@ -90,10 +90,10 @@ export function LandingPage() {
             <div className="mb-12 max-w-2xl border-l-2 border-slate-900/90 pl-5">
               <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-slate-500">Послуги та ціни</p>
               <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-                Прозорий прайс під тип приміщення
+                Орієнтовна вартість під тип приміщення
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
-                Фіксована вартість для типових сценаріїв; великі об’єкти — після короткого опису задачі телефоном.
+                Фіксована вартість для типових сценаріїв; для великих та нестандартних об'єктів — фінальний кошторис формується після огляду.
               </p>
             </div>
 
@@ -110,21 +110,21 @@ export function LandingPage() {
                     href="#contact"
                     className="mt-6 inline-block text-xs font-medium uppercase tracking-wide text-slate-900 underline decoration-slate-400 underline-offset-4 hover:decoration-slate-900"
                   >
-                    Заявка
+                    Оформити замовлення
                   </a>
                 </article>
                 <article className="bg-white p-8">
                   <p className="text-[11px] font-medium uppercase tracking-widest text-slate-500">Етап 2</p>
                   <h3 className="mt-2 text-lg font-semibold tracking-tight text-slate-900">Сухий туман</h3>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                    Закріплення ефекту озонування, пом’якшення запаху озону, нейтральний «чистий» фон без різкої
+                    Закріплення ефекту озонування, пом'якшення запаху озону, нейтральний «чистий» фон без різкої
                     хімії.
                   </p>
                   <a
                     href="#contact"
                     className="mt-6 inline-block text-xs font-medium uppercase tracking-wide text-slate-900 underline decoration-slate-400 underline-offset-4 hover:decoration-slate-900"
                   >
-                    Заявка
+                    Оформити замовлення
                   </a>
                 </article>
               </div>
@@ -137,31 +137,31 @@ export function LandingPage() {
                   <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500">Компакт</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Міні, Smart, 2 двері</h4>
-                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">1200 грн</p>
+                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">від 1200 грн</p>
                     <ul className={`mt-5 ${LIST_CHECK}`}>
                       <li>Повне озонування салону</li>
-                      <li>Прибирання сторонніх запахів</li>
-                      <li>Фініш сухим туманом</li>
+                      <li>Усунення сторонніх запахів</li>
+                      <li>Фінішна обробка сухим туманом для закріплення результату</li>
                     </ul>
                   </article>
                   <article className="rounded-2xl border-2 border-slate-900 bg-white p-6 shadow-[0_10px_40px_rgba(15,23,42,0.10)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-600">Стандарт</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Хетчбеки, седани</h4>
-                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">1500 грн</p>
+                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">від 1500 грн</p>
                     <ul className={`mt-5 ${LIST_CHECK}`}>
                       <li>Глибоке озонування салону</li>
-                      <li>Стійкі запахи та бактерії</li>
-                      <li>Сухий туман</li>
+                      <li>Знищення стійких запахів та бактерій</li>
+                      <li>Нейтралізація залишків озону свіжим сухим туманом</li>
                     </ul>
                   </article>
                   <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)]">
-                    <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500">Об’єм</p>
+                    <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500">Об'єм</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Джипи, мінівени</h4>
-                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">2000 грн</p>
+                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">від 2000 грн</p>
                     <ul className={`mt-5 ${LIST_CHECK}`}>
                       <li>Посилене озонування</li>
-                      <li>Складні запахи, цвіль</li>
-                      <li>Преміум-фініш</li>
+                      <li>Боротьба зі складними запахами та цвіллю</li>
+                      <li>Преміум-фініш сухим туманом для тривалої свіжості</li>
                     </ul>
                   </article>
                 </div>
@@ -173,31 +173,31 @@ export function LandingPage() {
                   <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500">1 кімната</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Базовий пакет</h4>
-                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">3000 грн</p>
+                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">від 3000 грн</p>
                     <ul className={`mt-5 ${LIST_CHECK}`}>
-                      <li>Апарат, озонування</li>
-                      <li>Провітрювання</li>
-                      <li>Сухий туман за потреби</li>
+                      <li>Базова озонація приміщення</li>
+                      <li>Усунення побутових запахів</li>
+                      <li>Легкий шлейф свіжості за допомогою сухого туману</li>
                     </ul>
                   </article>
                   <article className="rounded-2xl border-2 border-slate-900 bg-white p-6 shadow-[0_10px_40px_rgba(15,23,42,0.10)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-600">2 кімнати</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Комплекс</h4>
-                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">4000 грн</p>
+                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">від 4000 грн</p>
                     <ul className={`mt-5 ${LIST_CHECK}`}>
-                      <li>Кімнати, кухня, коридор</li>
-                      <li>Побутові запахи</li>
-                      <li>Фініш сухим туманом</li>
+                      <li>Комплексна обробка (кімнати, кухня, коридор)</li>
+                      <li>Знищення бактерій та неприємного фону</li>
+                      <li>Фінальне очищення повітря сухим туманом</li>
                     </ul>
                   </article>
                   <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)]">
                     <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500">3 кімнати</p>
                     <h4 className="mt-2 text-base font-semibold text-slate-900">Повна площа</h4>
-                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">5000 грн</p>
+                    <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">від 5000 грн</p>
                     <ul className={`mt-5 ${LIST_CHECK}`}>
-                      <li>Очищення повітря</li>
-                      <li>Бактерії, алергени</li>
-                      <li>Закріплення туманом</li>
+                      <li>Максимальне покриття всієї площі</li>
+                      <li>Боротьба з алергенами та застарілими запахами</li>
+                      <li>Бар'єрний захист простору сухим туманом</li>
                     </ul>
                   </article>
                 </div>
@@ -210,11 +210,11 @@ export function LandingPage() {
                 <article className="rounded-2xl border border-slate-200 bg-zinc-50/60 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.06)]">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <h4 className="text-base font-semibold text-slate-900">Індивідуальний розрахунок</h4>
-                    <span className="text-sm text-slate-500">за оглядом об’єкта</span>
+                    <span className="text-sm text-slate-500">за оглядом об'єкта</span>
                   </div>
                   <p className="mt-4 text-2xl font-semibold tabular-nums text-slate-900">від 2000 грн</p>
                   <ul className={`mt-5 ${LIST_CHECK}`}>
-                    <li>Виїзд, оцінка об’єму</li>
+                    <li>Виїзд, оцінка об'єму</li>
                     <li>Озон: сирість, грибок, хімія</li>
                     <li>Дод. туман — окремо</li>
                   </ul>
@@ -237,9 +237,9 @@ export function LandingPage() {
         <section id="contact" className="scroll-mt-24 border-t border-slate-200 bg-white">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
             <div className="max-w-2xl rounded-2xl border border-slate-200 bg-zinc-50/40 p-8 shadow-[0_1px_2px_rgba(15,23,42,0.06)] sm:p-10">
-              <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">Заявка</h2>
+              <h2 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">Оформити замовлення</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                Зв’яжемося протягом 10 хвилин і погодимо час виїзду.
+                Зв'яжемося протягом 10 хвилин і погодимо час виїзду.
               </p>
               <LeadFormClient />
             </div>
@@ -261,11 +261,10 @@ export function LandingPage() {
             </a>
           </div>
           <p className="mt-3 max-w-xl text-xs leading-relaxed text-slate-500">
-            Київ та область · виїзд майстра · заявка онлайн без зобов’язань
+            Професійний підхід до чистоти вашого повітря
           </p>
         </div>
       </footer>
     </div>
   );
 }
-

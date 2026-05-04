@@ -31,7 +31,7 @@ const CLEANUP_INTERVAL_MS = 60 * 1000;
 const MAX_STORE_KEYS = 10_000;
 
 // Valid options for strict validation
-const VALID_SERVICES = ["Сухий туман", "Озонація", "Комплекс"];
+const VALID_SERVICES = ["Сухий туман", "Озонація", "Комплекс", "Демеркуризація"];
 const VALID_OBJECTS = ["Авто", "Квартира", "Гараж/офіс"];
 
 const corsHeaders = {

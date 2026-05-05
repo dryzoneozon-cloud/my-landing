@@ -257,21 +257,50 @@ export function LandingPage() {
       </main>
 
       <footer className="border-t border-slate-200 bg-slate-50/80">
-        <div className="mx-auto max-w-7xl px-4 py-8 text-sm text-slate-500 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="relative h-12 w-12 overflow-hidden rounded-2xl bg-white p-1.5 shadow-md ring-1 ring-slate-200">
-                <Image src={LOGO_SRC} alt="DryZone" fill sizes="48px" className="object-contain" />
-              </span>
-              <p className="font-medium text-slate-700">© 2026 DryZone</p>
+        <div className="mx-auto max-w-7xl px-4 py-12 text-sm text-slate-500 sm:px-6 lg:px-8">
+          <div className="grid gap-8 md:grid-cols-2 md:gap-12 lg:items-start">
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="relative h-12 w-12 overflow-hidden rounded-2xl bg-white p-1.5 shadow-md ring-1 ring-slate-200">
+                    <Image src={LOGO_SRC} alt="DryZone" fill sizes="48px" className="object-contain" />
+                  </span>
+                  <p className="font-medium text-slate-700">© 2026 DryZone</p>
+                </div>
+              </div>
+              <div>
+                <a href="tel:+380633469005" className="inline-block text-lg font-medium text-slate-700 transition hover:text-slate-900">
+                  +38 (063) 346-90-05
+                </a>
+                <p className="mt-2 max-w-sm text-xs leading-relaxed text-slate-500">
+                  Професійний підхід до чистоти вашого повітря. Працюємо по всьому Києву та області.
+                </p>
+              </div>
             </div>
-            <a href="tel:+380633469005" className="font-medium text-slate-700 transition hover:text-slate-900">
-              +38 (063) 346-90-05
-            </a>
+
+            <div className="flex w-full flex-col md:ml-auto max-w-sm">
+              <div className="relative h-32 w-full overflow-hidden rounded-xl border border-slate-200 shadow-inner sm:h-40">
+                <iframe 
+                  src="https://maps.google.com/maps?q=50.398966,30.365554&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                  width="100%" 
+                  height="100%" 
+                  className="absolute inset-0 h-full w-full border-0"
+                  allowFullScreen={false} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+              <a 
+                href="https://www.google.com/maps/dir/?api=1&destination=50.398966,30.365554" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-medium text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                Прокласти маршрут
+              </a>
+            </div>
           </div>
-          <p className="mt-3 max-w-xl text-xs leading-relaxed text-slate-500">
-            Професійний підхід до чистоти вашого повітря
-          </p>
         </div>
       </footer>
     </div>

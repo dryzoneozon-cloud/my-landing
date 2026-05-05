@@ -41,6 +41,28 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-NTJK6L4W');
           `}
         </Script>
+        <Script id="json-ld-local-business" type="application/ld+json" strategy="afterInteractive">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "DryZone",
+              "telephone": "063 346 9005",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Київ",
+                "addressCountry": "UA"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 50.398966,
+                "longitude": 30.365554
+              },
+              "url": "https://www.dryzone.solutions",
+              "hasMap": "https://maps.app.goo.gl/rfZVjPz4r266pPk76"
+            }
+          `}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <noscript>

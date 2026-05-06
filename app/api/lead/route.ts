@@ -187,9 +187,24 @@ function escapeTelegramHtml(text: string): string {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+function shouldSkipSheetsInDev(): boolean {
+  return (
+    process.env.NODE_ENV === "development" && process.env.LEAD_DEV_SKIP_STORAGE === "1"
+  );
+}
+
 async function sendToGoogleSheets(data: Record<string, string>): Promise<void> {
+  if (shouldSkipSheetsInDev()) {
+    console.warn("[lead] LEAD_DEV_SKIP_STORAGE=1: пропускаємо Google Sheets", data.requestId);
+    return;
+  }
+
   const webhookUrl = process.env.GOOGLE_SCRIPT_WEBHOOK_URL;
-  if (!webhookUrl) throw new Error("GOOGLE_SCRIPT_WEBHOOK_URL is not configured");
+  if (!webhookUrl) {
+    throw new Error(
+      "GOOGLE_SCRIPT_WEBHOOK_URL is not configured (додай у .env.local або LEAD_DEV_SKIP_STORAGE=1 для dev)",
+    );
+  }
 
   /** Одна попытка: повторные запросы с тем же `requestId` давали дубли строк в таблице. */
   const response = await fetch(webhookUrl, {

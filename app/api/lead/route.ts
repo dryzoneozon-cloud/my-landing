@@ -34,6 +34,7 @@ const MAX_STORE_KEYS = 10_000;
 // Valid options for strict validation
 const VALID_SERVICES = ["Сухий туман", "Озонація", "Комплекс", "Демеркуризація"];
 const VALID_OBJECTS = ["Авто", "Квартира", "Гараж/офіс"];
+const OBJECTS_REQUIRING_ADDRESS: string[] = ["Квартира", "Гараж/офіс"];
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -186,17 +187,46 @@ function escapeTelegramHtml(text: string): string {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+/**
+ * Web App URL `.../exec` often отвечает 302 на `script.googleusercontent.com`.
+ * При автоматическом follow часть клиентов теряет тело POST — повторяем POST на Location вручную.
+ */
+async function postToGoogleAppsScriptWebhook(
+  startUrl: string,
+  body: string,
+  signal: AbortSignal,
+): Promise<Response> {
+  const headers = { "Content-Type": "text/plain;charset=utf-8" };
+  let url = startUrl;
+  for (let hop = 0; hop < 8; hop++) {
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body,
+      redirect: "manual",
+      cache: "no-store",
+      signal,
+    });
+
+    if (response.status >= 300 && response.status < 400) {
+      const loc = response.headers.get("Location");
+      if (loc) {
+        url = new URL(loc, url).href;
+        continue;
+      }
+    }
+    return response;
+  }
+  throw new Error("Sheets webhook: too many redirects");
+}
+
 async function sendToGoogleSheets(data: Record<string, string>): Promise<void> {
   const webhookUrl = process.env.GOOGLE_SCRIPT_WEBHOOK_URL;
   if (!webhookUrl) throw new Error("GOOGLE_SCRIPT_WEBHOOK_URL is not configured");
 
   const controller = AbortSignal.timeout(8000);
-  const response = await fetch(webhookUrl, {
-    method: "POST",
-    body: new URLSearchParams(data),
-    cache: "no-store",
-    signal: controller,
-  });
+  const body = JSON.stringify(data);
+  const response = await postToGoogleAppsScriptWebhook(webhookUrl, body, controller);
   if (!response.ok) throw new Error(`Sheets webhook failed: ${response.status}`);
 }
 
@@ -269,6 +299,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "invalid_object" }, { status: 400, headers: corsHeaders });
   }
 
+  if (OBJECTS_REQUIRING_ADDRESS.includes(object) && !address) {
+    return NextResponse.json({ ok: false, error: "address_required" }, { status: 400, headers: corsHeaders });
+  }
+
   // Rate Limiting & Deduplication (Redis or Memory)
   const { limited, duplicate } = await checkRateLimitAndDedupe(ip, phone, now);
 
@@ -284,6 +318,7 @@ export async function POST(request: NextRequest) {
     service,
     object,
     address,
+    "Адреса": address,
     source,
     pageUrl: cleanString(payload.pageUrl, 300),
     ip,

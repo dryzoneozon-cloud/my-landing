@@ -42,6 +42,12 @@ export function LeadFormClient() {
       return;
     }
 
+    const needsAddress = ["Квартира", "Гараж/офіс"].includes(objectType);
+    if (needsAddress && !address) {
+      setLeadStatus({ text: "Будь ласка, вкажіть адресу.", tone: "err" });
+      return;
+    }
+
     const payload = {
       name,
       phone,
@@ -81,13 +87,14 @@ export function LeadFormClient() {
       const code = err instanceof Error ? err.message : "submit_failed";
       const map: Record<string, string> = {
         rate_limited: "Забагато спроб. Спробуйте трохи пізніше.",
-        duplicate_recent_lead: "Схоже, ви щойно вже надсилали заявку. Перевірте Telegram або таблицю.",
+        duplicate_recent_lead: "Схоже, ви щойно вже надсилали заявку.",
         storage_unavailable: "Сервіс заявок тимчасово недоступний. Спробуйте за 1–2 хвилини.",
         invalid_phone: "Перевірте номер телефону й спробуйте ще раз.",
         name_and_phone_required: "Вкажіть ім’я та телефон.",
         invalid_json: "Помилка надсилання даних. Оновіть сторінку й спробуйте ще раз.",
         invalid_service: "Обрана недопустима послуга.",
         invalid_object: "Обраний недопустимий об'єкт.",
+        address_required: "Будь ласка, вкажіть адресу.",
       };
       setLeadStatus({
         text: map[code] || "Не вдалося надіслати заявку. Спробуйте ще раз.",
@@ -179,13 +186,17 @@ export function LeadFormClient() {
         {showAddress && (
           <div className="min-w-0 space-y-1">
             <label className="text-xs font-medium text-slate-600" htmlFor="lead-address">
-              Адреса
+              Адреса{" "}
+              <span className="text-red-600" aria-hidden="true">
+                *
+              </span>
             </label>
             <input
               id="lead-address"
               name="address"
               type="text"
               required
+              aria-required="true"
               placeholder="Адреса"
               className="min-h-[44px] w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
             />

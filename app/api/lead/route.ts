@@ -9,6 +9,7 @@ type LeadPayload = {
   phone?: string;
   service?: string;
   object?: string;
+  address?: string;
   source?: string;
   createdAt?: string;
   pageUrl?: string;
@@ -248,6 +249,7 @@ export async function POST(request: NextRequest) {
   const phone = normalizePhone(cleanString(payload.phone, 40));
   const service = cleanString(payload.service, 120);
   const object = cleanString(payload.object, 120);
+  const address = cleanString(payload.address, 300);
   const website = cleanString(payload.website, 120);
   const source = cleanString(payload.source || "Лендинг DryZone", 120);
   const createdAt = cleanString(payload.createdAt || new Date().toISOString(), 80);
@@ -281,6 +283,7 @@ export async function POST(request: NextRequest) {
     phone,
     service,
     object,
+    address,
     source,
     pageUrl: cleanString(payload.pageUrl, 300),
     ip,
@@ -302,17 +305,19 @@ export async function POST(request: NextRequest) {
     const safePhone = escapeTelegramHtml(phone);
     const safeService = escapeTelegramHtml(service || "-");
     const safeObject = escapeTelegramHtml(object || "-");
+    const safeAddress = escapeTelegramHtml(address || "");
 
-    await notifyTelegram(
-      [
-        "📩 <b>Нова заявка DryZone</b>",
+    const tgLines = [
+        `\u{1F4E9} <b>\u041d\u043e\u0432\u0430 \u0437\u0430\u044f\u0432\u043a\u0430 DryZone</b>`,
         `ID: <code>${requestId}</code>`,
-        `Ім’я: ${safeName}`,
-        `Телефон: ${safePhone}`,
-        `Послуга: ${safeService}`,
-        `Об’єкт: ${safeObject}`,
-      ].join("\n"),
-    );
+        `\u0406\u043c'\u044f: ${safeName}`,
+        `\u0422\u0435\u043b\u0435\u0444\u043e\u043d: ${safePhone}`,
+        `\u041f\u043e\u0441\u043b\u0443\u0433\u0430: ${safeService}`,
+        `\u041e\u0431'\u0454\u043a\u0442: ${safeObject}`,
+    ];
+    if (address) tgLines.push(`\u0410\u0434\u0440\u0435\u0441\u0430: ${safeAddress}`);
+
+    await notifyTelegram(tgLines.join("\n"));
 
     return NextResponse.json({ ok: true, requestId }, { status: 200, headers: corsHeaders });
   } catch (error) {

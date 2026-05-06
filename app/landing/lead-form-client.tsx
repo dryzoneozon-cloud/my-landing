@@ -22,6 +22,9 @@ export function LeadFormClient() {
     tone: "muted",
   });
   const [submitting, setSubmitting] = useState(false);
+  const [selectedObject, setSelectedObject] = useState("Авто");
+
+  const showAddress = ["Квартира", "Гараж/офіс"].includes(selectedObject);
 
   async function onLeadSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,6 +34,7 @@ export function LeadFormClient() {
     const phone = String(fd.get("phone") || "").trim();
     const service = String(fd.get("service") || "").trim();
     const objectType = String(fd.get("object") || "").trim();
+    const address = String(fd.get("address") || "").trim();
     const website = String(fd.get("website") || "").trim();
 
     if (!name || !phone) {
@@ -43,6 +47,7 @@ export function LeadFormClient() {
       phone,
       service,
       object: objectType,
+      address,
       website,
       source: "Лендинг DryZone",
       pageUrl: typeof window !== "undefined" ? window.location.href : "",
@@ -162,18 +167,36 @@ export function LeadFormClient() {
             id="lead-object"
             name="object"
             className="min-h-[44px] w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
-            defaultValue="Авто"
+            value={selectedObject}
+            onChange={(e) => setSelectedObject(e.target.value)}
           >
             <option value="Авто">Авто</option>
             <option value="Квартира">Квартира</option>
             <option value="Гараж/офіс">Гараж/офіс</option>
           </select>
         </div>
+
+        {showAddress && (
+          <div className="min-w-0 space-y-1">
+            <label className="text-xs font-medium text-slate-600" htmlFor="lead-address">
+              Адреса
+            </label>
+            <input
+              id="lead-address"
+              name="address"
+              type="text"
+              required
+              placeholder="Адреса"
+              className="min-h-[44px] w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
+            />
+          </div>
+        )}
+
         <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
         <button
           type="submit"
           disabled={submitting}
-          className="min-h-[44px] rounded-lg border border-slate-900 bg-slate-900 px-4 py-2 text-xs font-medium uppercase tracking-wide text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60 sm:col-span-2 lg:col-span-1"
+          className={`min-h-[44px] w-full flex items-center justify-center rounded-lg border border-slate-900 bg-slate-900 px-4 py-2 text-xs font-medium uppercase tracking-wide text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60 sm:col-span-2 ${showAddress ? "lg:col-span-5 justify-self-center lg:mt-2" : "lg:col-span-1"}`}
         >
           Надіслати
         </button>

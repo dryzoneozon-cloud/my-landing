@@ -187,86 +187,20 @@ function escapeTelegramHtml(text: string): string {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-/**
- * Web App URL `.../exec` often отвечает 302 на `script.googleusercontent.com`.
- * При автоматическом follow часть клиентов теряет тело POST — повторяем POST на Location вручную.
- */
-async function postToGoogleAppsScriptWebhook(
-  startUrl: string,
-  body: string,
-  signal: AbortSignal,
-): Promise<Response> {
-  const headers = { "Content-Type": "text/plain;charset=utf-8" };
-  let url = startUrl;
-  for (let hop = 0; hop < 8; hop++) {
-    const response = await fetch(url, {
-      method: "POST",
-      headers,
-      body,
-      redirect: "manual",
-      cache: "no-store",
-      signal,
-    });
-
-    if (response.status >= 300 && response.status < 400) {
-      const loc = response.headers.get("Location");
-      if (loc) {
-        url = new URL(loc, url).href;
-        continue;
-      }
-    }
-    return response;
-  }
-  throw new Error("Sheets webhook: too many redirects");
-}
-
 async function sendToGoogleSheets(data: Record<string, string>): Promise<void> {
   const webhookUrl = process.env.GOOGLE_SCRIPT_WEBHOOK_URL;
   if (!webhookUrl) throw new Error("GOOGLE_SCRIPT_WEBHOOK_URL is not configured");
 
-  const timeoutMs = 18_000;
-  const attempts: Array<{ label: string; run: () => Promise<Response> }> = [
-    {
-      label: "json_plain_manual_redirect",
-      run: () => postToGoogleAppsScriptWebhook(webhookUrl, JSON.stringify(data), AbortSignal.timeout(timeoutMs)),
-    },
-    {
-      label: "form_follow_redirect",
-      run: () =>
-        fetch(webhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded; charset=utf-8" },
-          body: new URLSearchParams(data),
-          redirect: "follow",
-          cache: "no-store",
-          signal: AbortSignal.timeout(timeoutMs),
-        }),
-    },
-    {
-      label: "form_follow_redirect_no_content_type",
-      run: () =>
-        fetch(webhookUrl, {
-          method: "POST",
-          body: new URLSearchParams(data),
-          redirect: "follow",
-          cache: "no-store",
-          signal: AbortSignal.timeout(timeoutMs),
-        }),
-    },
-  ];
-
-  const failures: string[] = [];
-  for (const { label, run } of attempts) {
-    try {
-      const response = await run();
-      if (response.ok) return;
-      failures.push(`${label}:${response.status}`);
-    } catch (err) {
-      failures.push(`${label}:${err instanceof Error ? err.message : String(err)}`);
-    }
-  }
-
-  throw new Error(`Sheets webhook failed (${failures.join(" | ")})`);
+  /** Одна попытка: повторные запросы с тем же `requestId` давали дубли строк в таблице. */
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded; charset=utf-8" },
+    body: new URLSearchParams(data),
+    redirect: "follow",
+    cache: "no-store",
+    signal: AbortSignal.timeout(18_000),
+  });
+  if (!response.ok) throw new Error(`Sheets webhook failed: ${response.status}`);
 }
 
 async function notifyTelegram(message: string): Promise<void> {

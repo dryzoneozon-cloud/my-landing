@@ -224,10 +224,49 @@ async function sendToGoogleSheets(data: Record<string, string>): Promise<void> {
   const webhookUrl = process.env.GOOGLE_SCRIPT_WEBHOOK_URL;
   if (!webhookUrl) throw new Error("GOOGLE_SCRIPT_WEBHOOK_URL is not configured");
 
-  const controller = AbortSignal.timeout(8000);
-  const body = JSON.stringify(data);
-  const response = await postToGoogleAppsScriptWebhook(webhookUrl, body, controller);
-  if (!response.ok) throw new Error(`Sheets webhook failed: ${response.status}`);
+  const timeoutMs = 18_000;
+  const attempts: Array<{ label: string; run: () => Promise<Response> }> = [
+    {
+      label: "json_plain_manual_redirect",
+      run: () => postToGoogleAppsScriptWebhook(webhookUrl, JSON.stringify(data), AbortSignal.timeout(timeoutMs)),
+    },
+    {
+      label: "form_follow_redirect",
+      run: () =>
+        fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded; charset=utf-8" },
+          body: new URLSearchParams(data),
+          redirect: "follow",
+          cache: "no-store",
+          signal: AbortSignal.timeout(timeoutMs),
+        }),
+    },
+    {
+      label: "form_follow_redirect_no_content_type",
+      run: () =>
+        fetch(webhookUrl, {
+          method: "POST",
+          body: new URLSearchParams(data),
+          redirect: "follow",
+          cache: "no-store",
+          signal: AbortSignal.timeout(timeoutMs),
+        }),
+    },
+  ];
+
+  const failures: string[] = [];
+  for (const { label, run } of attempts) {
+    try {
+      const response = await run();
+      if (response.ok) return;
+      failures.push(`${label}:${response.status}`);
+    } catch (err) {
+      failures.push(`${label}:${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  throw new Error(`Sheets webhook failed (${failures.join(" | ")})`);
 }
 
 async function notifyTelegram(message: string): Promise<void> {

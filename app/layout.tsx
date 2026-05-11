@@ -32,6 +32,47 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
       <head>
+        <Script id="strip-extension-attrs" strategy="beforeInteractive">
+          {`
+            (function () {
+              if (typeof window === 'undefined' || typeof MutationObserver === 'undefined') return;
+              var PREFIX = 'bis_';
+              var stripFromElement = function (el) {
+                if (!el || el.nodeType !== 1 || !el.attributes) return;
+                for (var i = el.attributes.length - 1; i >= 0; i--) {
+                  var name = el.attributes[i].name;
+                  if (name.indexOf(PREFIX) === 0) el.removeAttribute(name);
+                }
+              };
+              var stripFromTree = function (root) {
+                stripFromElement(root);
+                if (root && root.querySelectorAll) {
+                  var nodes = root.querySelectorAll('*');
+                  for (var i = 0; i < nodes.length; i++) stripFromElement(nodes[i]);
+                }
+              };
+              try {
+                new MutationObserver(function (mutations) {
+                  for (var i = 0; i < mutations.length; i++) {
+                    var m = mutations[i];
+                    if (m.type === 'attributes' && m.attributeName && m.attributeName.indexOf(PREFIX) === 0) {
+                      m.target.removeAttribute(m.attributeName);
+                    } else if (m.type === 'childList') {
+                      for (var j = 0; j < m.addedNodes.length; j++) stripFromTree(m.addedNodes[j]);
+                    }
+                  }
+                }).observe(document.documentElement, { attributes: true, childList: true, subtree: true });
+              } catch (e) {}
+              if (document.readyState !== 'loading') {
+                stripFromTree(document.documentElement);
+              } else {
+                document.addEventListener('DOMContentLoaded', function () {
+                  stripFromTree(document.documentElement);
+                });
+              }
+            })();
+          `}
+        </Script>
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -64,7 +105,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NTJK6L4W"

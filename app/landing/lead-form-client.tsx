@@ -2,6 +2,28 @@
 
 import { useState } from "react";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+  }
+}
+
+function trackLeadConversion() {
+  if (typeof window === "undefined") return;
+  const params = {
+    send_to: "AW-18141231180/RRr9CKalwascEMzwtMpD",
+    value: 1.0,
+    currency: "UAH",
+  };
+  if (typeof window.gtag === "function") {
+    window.gtag("event", "conversion", params);
+    return;
+  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(["event", "conversion", params]);
+}
+
 function getTracking() {
   if (typeof window === "undefined") return {};
   const params = new URLSearchParams(window.location.search);
@@ -83,6 +105,7 @@ export function LeadFormClient() {
         text: `Замовлення надіслано. Номер: ${result.requestId}.`,
         tone: "ok",
       });
+      trackLeadConversion();
     } catch (err) {
       const code = err instanceof Error ? err.message : "submit_failed";
       const map: Record<string, string> = {
